@@ -1,4 +1,4 @@
-<%= form_with(model: Task) do |form| %>
+<%= form_with(model: task) do |form| %>
 
   <div class="field">
     <%= form.label :title %>
@@ -6,7 +6,9 @@
   </div>
   <div class="field">
     <%= form.label :content %>
-    <%= form.area_field :content %>
+    <%= form.text_area :content %>
   </div>
+
+  <div class="actions">
   <%= form.submit %>
 <% end %>
