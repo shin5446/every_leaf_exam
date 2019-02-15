@@ -18,7 +18,7 @@
 
 【 データベース構成 】
 
-| uses TB    | tasks TB    |labels TB     |task_labels TB(中間TB)| 
+| users TB    | tasks TB    |labels TB     |task_labels TB(中間TB)| 
 |:-----------:|:------------:|:------------:|:------------:|
 | *カラム*|*カラム*       |*カラム*  |*カラム*              |
 |name :string|title :string|   name :string    |task_id :integer             |
