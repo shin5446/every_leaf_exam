@@ -9,8 +9,12 @@ class TasksController < ApplicationController
     end
 
     def create
-      Task.create!(task_params)
+      @task = Task.create(task_params)
+      if @task.save
       redirect_to tasks_path, notice: "タスクを作成いたしました"
+      else
+        render 'new'
+      end
     end
 
     def show
