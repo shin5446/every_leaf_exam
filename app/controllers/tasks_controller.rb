@@ -6,7 +6,7 @@ class TasksController < ApplicationController
 
     def new
       if params[:back]
-      @task = Task.new(task_params)
+        @task = Task.new(task_params)
       else
         @task = Task.new
       end
