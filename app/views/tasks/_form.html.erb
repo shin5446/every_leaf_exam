@@ -1,11 +1,11 @@
-<%= form_with(model: task) do |form| %>
+<%= form_with(model: @task,local: true) do |form| %>
 
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :タイトル %>
     <%= form.text_field :title %>
   </div>
   <div class="field">
-    <%= form.label :content %>
+    <%= form.label :内容 %>
     <%= form.text_area :content %>
   </div>
 
