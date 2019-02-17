@@ -5,7 +5,11 @@ class TasksController < ApplicationController
     end
 
     def new
-      @task = Task.new
+      if params[:back]
+      @task = Task.new(task_params)
+      else
+        @task = Task.new
+      end
     end
 
     def create
@@ -31,6 +35,11 @@ class TasksController < ApplicationController
       else
         render 'edit'
       end
+    end
+
+    def confirm
+      @task = Task.new(task_params)
+      render :new if @task.invalid?
     end
 
     def destroy
