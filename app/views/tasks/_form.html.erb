@@ -15,11 +15,29 @@
     <%= form.label :タイトル%>
     <%= form.text_field :title %>
   </div>
+
   <div class="field">
     <%= form.label :内容%>
     <%= form.text_area :content %>
   </div>
 
+  <div class="field">
+    <%= form.label :終了期限%>
+    <%= form.text_field :deadline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :優先順位%>
+    <%= form.text_field :priority %>
+  </div>
+
+  <div class="field">
+    <%= form.label :状態%>
+    <%= form.text_field :status %>
+  </div>
+
   <div class="actions">
   <%= form.submit %>
+  </div>
+
 <% end %>
