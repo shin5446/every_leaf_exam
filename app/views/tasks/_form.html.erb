@@ -23,17 +23,17 @@
 
   <div class="field">
     <%= form.label :終了期限%>
-    <%= form.text_field :deadline %>
+    <%= form.date_field :deadline %>
   </div>
 
   <div class="field">
     <%= form.label :優先順位%>
-    <%= form.text_field :priority %>
+    <%= form.select :priority, [["高"], ["中"],["下"]] %>
   </div>
 
   <div class="field">
     <%= form.label :状態%>
-    <%= form.text_field :status %>
+    <%= form.select :status, [["未"], ["済"]] %>
   </div>
 
   <div class="actions">
