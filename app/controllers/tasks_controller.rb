@@ -2,9 +2,11 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
     def index
       if  params[:sort_expired]
-      @tasks = Task.all.order(deadline: :desc)
+        @tasks = Task.all.order(deadline: :desc)
+      elsif params[:task][:title]
+        @tasks = Task.where('title LIKE ?', "%#{ params[:task][:title]}%")
       else
-      @tasks = Task.all.order(created_at: :desc)
+        @tasks = Task.all.order(created_at: :desc)
       end
     end
 
@@ -54,7 +56,7 @@ class TasksController < ApplicationController
     private
 
     def task_params
-      params.require(:task).permit(:title, :content, :priority, :deadline, :status, :image, :user_id)
+      params.require(:task).permit(:title, :content, :priority, :deadline, :status, :image, :user_id,)
     end
 
     def set_task

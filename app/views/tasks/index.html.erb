@@ -1,5 +1,11 @@
 <h1>タスク一覧</h1>
 
+<%= form_with(model: Task.new, method: :get, local: true , url: tasks_path ) do |f| %>
+  <%= f.label :title_search, 'タイトル検索' %>
+  <%= f.text_field :title %>
+  <%= f.hidden_field :search, title: "true"  %>
+  <%= f.submit 'Search' %>
+<% end %>
 <table>
   <tr>
     <th>タイトル</th>
