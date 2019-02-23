@@ -1,9 +1,13 @@
 <h1>タスク一覧</h1>
 
-<%= form_with(model: Task.new, method: :get, local: true , url: tasks_path ) do |f| %>
+<%= form_with(model: Task.new, method: :get, local: true , url: tasks_path) do |f| %>
   <%= f.label :title_search, 'タイトル検索' %>
   <%= f.text_field :title %>
-  <%= f.hidden_field :search, title: "true"  %>
+  <%= f.label :status_search, '状態検索' %>
+  <%= f.select :status, [["未着手"],["着手中"],["完了"]], include_blank: true %>
+  <%= f.hidden_field :search1, title: 'true' %>
+  <%= f.hidden_field :search2, status: 'true' %>
+
   <%= f.submit 'Search' %>
 <% end %>
 <table>
@@ -31,4 +35,4 @@
 　 <% end %>
 </table>
 <%= link_to '新しくタスクを投稿する', new_task_path %>
-<%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
+<%= link_to "終了期限でソートする", tasks_path(sort_expired: true) %>
