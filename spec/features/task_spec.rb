@@ -48,7 +48,7 @@ RSpec.feature "タスク管理機能", type: :feature do
     fill_in 'task_deadline', with: Date.today
     click_on '登録する'
     # save_and_open_page
-    expect(page).to have_content "以下の内容で、送信する。\nタイトル:あああ\n本文:いいい\n終了期限:2019-02-22\n優先順位:高\n状態:未"
+    expect(page).to have_content "以下の内容で、送信する。\nタイトル:あああ\n本文:いいい\n終了期限:2019-02-24\n優先順位:高\n状態:未着手"
     click_on '登録する'
   end
 
@@ -59,4 +59,19 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(Task.order("deadline DESC").map(&:title)).to eq ["test_task_04","test_task_02","test_task_03","test_task_01"]
   end
 
+  scenario "sort_deadlineスコープに対するテスト" do
+    visit tasks_path
+    fill_in 'task_title', with: 'test_task_01'
+    click_on 'Search'
+    # save_and_open_page
+    expect(Task.search_title("test_task_01")).to eq Task.where("title LIKE ?", "%#{"test_task_01"}%")
+  end
+
+  scenario "search_statusスコープに対するテスト" do
+    visit tasks_path
+    select'未着手', from: 'task_status'
+    click_on 'Search'
+    # save_and_open_page
+    expect(Task.search_title("未着手")).to eq Task.where("title LIKE ?", "%#{"未着手"}%")
+  end
 end

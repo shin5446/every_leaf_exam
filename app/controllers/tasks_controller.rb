@@ -1,28 +1,25 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
     def index
-      # if params # 入力がある場合の処理
-      #   @tasks = Task.all
-      #   @tasks = Task.where(['title LIKE ?', "%#{params["title"]}%"]) if params["title"]
-      #   @tasks = Task.where(['status LIKE ?', "%#{params["status"]}%"]) if params["status"]
-      #   # @tasks = Task.where(['status LIKE ? and title LIKE ?', "%#{params["status"]}%"], "%#{params["title"]}%"]) if params["status"] && params["title"]
-      #   @tasks = Task.all.order(deadline: :desc) if  params[:sort_expired]
-      # else
-      #   @tasks = Task.all.order(created_at: :desc)
-      # end
       if params[:sort_expired]
-        @tasks = Task.all.order(deadline: :desc)
-       elsif params[:task] != nil
-          if params[:task][:search1] && params[:task][:search2]
-            @tasks = Task.where("status LIKE ? and title LIKE ?" , "%#{ params[:task][:status] }%", "%#{ params[:task][:title] }%")
-          elsif params[:task][:search1]
-            @tasks = Task.where("status LIKE ?", "%#{ params[:task][:title] }%")
-          else params[:task][:search2]
-            @tasks = Task.where("title LIKE ?", "%#{ params[:task][:status] }%")
-          end
-       else
-        @tasks = Task.all.order(created_at: :desc)
+        @tasks = Task.all.sort_deadline
+      else
+        @tasks = Task.all.sort_created_at
       end
+
+      if params[:task] != nil
+      # if params[:task].present?
+      # if params[:search] == "true"
+        if params[:task][:title] && params[:task][:status]
+          @tasks = Task.search_title(params[:task][:title]).search_status(params[:task][:status])
+          # @tasks = Task.search_title_status(params[:task][:title],params[:task][:status])
+        elsif params[:task][:title]
+          @tasks = Task.search_title(params[:task][:title])
+        else params[:task][:status]
+          @tasks = Task.search_status(params[:task][:status])
+        end
+      end
+
     end
 
     def new

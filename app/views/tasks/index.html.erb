@@ -5,8 +5,13 @@
   <%= f.text_field :title %>
   <%= f.label :status_search, '状態検索' %>
   <%= f.select :status, [["未着手"],["着手中"],["完了"]], include_blank: true %>
-  <%= f.hidden_field :search1, title: 'true' %>
+  <%
+=begin%>
+ <%= f.hidden_field :search1, title: 'true' %>
   <%= f.hidden_field :search2, status: 'true' %>
+<%
+=end%>
+<%= f.hidden_field :search, value: 'true' %>
 
   <%= f.submit 'Search' %>
 <% end %>
