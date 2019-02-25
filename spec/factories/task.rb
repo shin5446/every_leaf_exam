@@ -6,6 +6,7 @@ FactoryBot.define do
       title { 'test_task_01' }
       content { 'testtesttest' }
       deadline { '1923-04-20' }
+      status {'完了'}
     end
 
     # 作成するテストデータの名前を「second_task」とします
