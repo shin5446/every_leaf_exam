@@ -38,6 +38,7 @@
       <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete,data: { confirm: '本当に削除していいですか？'} %></td>
     </tr>
 　 <% end %>
+<%= paginate @tasks %>
 </table>
 <%= link_to '新しくタスクを投稿する', new_task_path %>
 <%= link_to "終了期限でソートする", tasks_path(sort_expired: true) %>
