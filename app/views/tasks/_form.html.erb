@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :終了期限%>
-    <%= form.date_field :deadline %>
+    <%= form.date_field :deadline, value: Time.now.strftime("%Y-%m-%d") %>
   </div>
 
   <div class="field">
