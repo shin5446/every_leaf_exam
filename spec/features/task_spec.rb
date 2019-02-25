@@ -74,4 +74,11 @@ RSpec.feature "タスク管理機能", type: :feature do
     # save_and_open_page
     expect(Task.search_title("未着手")).to eq Task.where("title LIKE ?", "%#{"未着手"}%")
   end
+
+  scenario "タスクが優先順位の降順に並んでいるかのテスト" do
+    visit tasks_path
+    click_link '優先順位でソートする'
+    # save_and_open_page
+    expect(Task.order("priority DESC").map(&:priority)).to eq ["test_task_04","test_task_03","test_task_02","test_task_01"]
+  end
 end

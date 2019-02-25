@@ -28,12 +28,12 @@
 
   <div class="field">
     <%= form.label :優先順位%>
-    <%= form.select :priority, [["高","1"], ["中","2"],["低","3"]] %>
+    <%= form.select :priority,Task.priorities.keys,include_blank: true, selected:"" %>
   </div>
 
   <div class="field">
     <%= form.label :状態%>
-    <%= form.select :status, [["未着手"],["着手中"],["完了"]] %>
+    <%= form.select :status, [["未着手"],["着手中"],["完了"]],include_blank: true, selected:"" %>
   </div>
 
   <div class="actions">
