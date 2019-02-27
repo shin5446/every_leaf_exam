@@ -1,7 +1,7 @@
 100.times do |n|
     name = Faker::Pokemon.name
     email = Faker::Internet.email
-    password = "password"
+    # password = "password"
     User.create!(name: name,
                  email: email,
                 #  password: password,
