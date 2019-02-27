@@ -1,17 +1,17 @@
-<h1>Sign up</h1>
+<h1>ユーザー登録</h1>
 
 <%= form_with(model: @user, local: true) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.label :名前 %>
+  <%= f.text_field :name, class:"form-control form-group" %>
 
-  <%= f.label :email %>
-  <%= f.email_field :email %>
+  <%= f.label :メールアドレス %>
+  <%= f.email_field :email, class:"form-control form-group" %>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+  <%= f.label :パスワード %>
+  <%= f.password_field :password, class:"form-control form-group" %>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+  <%= f.label :パスワード（確認） %>
+  <%= f.password_field :password_confirmation, class:"form-control form-group" %>
 
-  <%= f.submit "Create my account" %>
+  <%= f.submit "登録する", class: "btn btn-outline-info btn-sm" %>
 <% end %>
