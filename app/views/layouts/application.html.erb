@@ -10,7 +10,15 @@
   </head>
 
   <body>
-  <p><%= notice %></p>
+  <header class = "border-bottom">
+
+    <div class = "apptitle navbar navbar-expand-md navbar-light navbar-brand">万葉TASK</div>
+  </header>
+  <div class = "container">
+  <% if notice.present?  %>
+　  <p class = "alert alert-success"><%= notice %></p>
+  <% end %>
     <%= yield %>
+  </div>
   </body>
 </html>

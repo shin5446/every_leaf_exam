@@ -1,6 +1,28 @@
 <h1>タスク詳細画面</h1>
-<p>タイトル: <%= @task.title %></p>
-<p>内容: <%= @task.content %></p>
-<p>終了期限: <%= @task.deadline%></p>
-<p>優先度: <%= @task.priority %></p>
-<p>状態: <%= @task.status %></p>
+
+<table class = "table table-hover" >
+  <tr>
+    <th>タイトル</th>
+    <td><%= @task.title %></td>
+  </tr>
+    <th>内容</th>
+    <td><%= @task.content %></td>
+  <tr>
+    <th>終了期限</th>
+    <td><%= @task.deadline %></td>
+  </tr>
+  <tr>
+    <th>優先度</th>
+    <td><%= @task.priority %></td>
+  </tr>
+  <tr>
+    <th>状態</th>
+    <td><%= @task.status %></td>
+  </tr>
+  <tr>
+    <th>作成日時</th>
+    <td><%= @task.created_at %></td>
+  </tr>
+</table>
+
+<%= link_to '戻る', tasks_path, class: "btn btn-outline-info btn-sm" %>

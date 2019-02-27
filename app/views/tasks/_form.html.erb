@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :タイトル%>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: "form-control col-xs-4" %>
   </div>
 
   <div class="field">
     <%= form.label :内容%>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, class: "form-control" %>
   </div>
 
   <div class="field">
@@ -36,8 +36,8 @@
     <%= form.select :status, [["未着手"],["着手中"],["完了"]],include_blank: true, selected:"" %>
   </div>
 
-  <div class="actions">
-  <%= form.submit %>
+  <div class="actions" >
+  <%= form.submit nil, class: "btn btn-outline-success btn-sm" %>
   </div>
 
 <% end %>
