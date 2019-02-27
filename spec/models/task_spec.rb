@@ -34,6 +34,6 @@ RSpec.describe Task, type: :model do
   end
 
   it "search_statusスコープに対するテスト" do
-    expect(Task.search_status("完了")).to eq Task.where("status", "%#{"完了"}%")
+    expect(Task.search_status("完了")).to eq Task.where("status LIKE ?", "%#{"完了"}%")
   end
 end
