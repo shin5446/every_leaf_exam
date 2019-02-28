@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user
     def index
       if params[:sort_expired]
         @tasks = Task.all.sort_deadline
@@ -81,6 +82,13 @@ class TasksController < ApplicationController
 
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "ログインしてください！"
+        redirect_to new_session_path
+      end
     end
 
 end
