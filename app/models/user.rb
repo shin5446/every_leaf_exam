@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_many :tasks
     validates :name, :email, presence: true
     validates :name, length: { maximum: 30 }
     validates :email, length: { maximum: 60 },uniqueness: true,

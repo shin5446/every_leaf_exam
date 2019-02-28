@@ -4,29 +4,29 @@ class TasksController < ApplicationController
 
     def index
       if params[:sort_expired]
-        @tasks = Task.all.sort_deadline
-        @tasks = Task.page(params[:page]).per(8).sort_deadline
+        @tasks = current_user.tasks.sort_deadline
+        @tasks = current_user.tasks.page(params[:page]).per(8).sort_deadline
       elsif params[:sort_priority]
-        @tasks = Task.all.sort_priority
-        @tasks = Task.page(params[:page]).per(8).sort_priority
+        @tasks = current_user.tasks.sort_priority
+        @tasks = current_user.tasks.page(params[:page]).per(8).sort_priority
       else
-        @tasks = Task.all.sort_created_at
-        @tasks = Task.page(params[:page]).per(8)
+        @tasks = current_user.tasks.sort_created_at
+        @tasks = current_user.tasks.page(params[:page]).per(8)
       end
 
       if params[:task] != nil
       # if params[:task].present?
       # if params[:search] == "true"
         if params[:task][:title] && params[:task][:status]
-          @tasks = Task.search_title(params[:task][:title]).search_status(params[:task][:status])
-          @tasks = Task.page(params[:page]).per(8).search_title(params[:task][:title]).search_status(params[:task][:status])
+          @tasks = current_user.tasks.search_title(params[:task][:title]).search_status(params[:task][:status])
+          @tasks = current_user.tasks.page(params[:page]).per(8).search_title(params[:task][:title]).search_status(params[:task][:status])
           # @tasks = Task.search_title_status(params[:task][:title],params[:task][:status])
         elsif params[:task][:title]
-          @tasks = Task.search_title(params[:task][:title])
-          @tasks = Task.page(params[:page]).per(8).search_title(params[:task][:title])
+          @tasks = current_user.tasks.search_title(params[:task][:title])
+          @tasks = current_user.tasks.page(params[:page]).per(8).search_title(params[:task][:title])
         else params[:task][:status]
-          @tasks = Task.search_status(params[:task][:status])
-          @tasks = Task.page(params[:page]).per(8).search_status(params[:task][:status])
+          @tasks = current_user.tasks.search_status(params[:task][:status])
+          @tasks = current_user.tasks.page(params[:page]).per(8).search_status(params[:task][:status])
         end
       end
 
@@ -41,9 +41,11 @@ class TasksController < ApplicationController
     end
 
     def create
-      @task = Task.create(task_params)
+      # @task = Task.create(task_params.merge(user_id: corrent_user.id))
+      # @task = corrent_user.tasks.new(task_params)
+      @task = current_user.tasks.build(task_params)
       if @task.save
-        redirect_to tasks_path, notice: "タスクを作成いたしました"
+        redirect_to tasks_path, notice: "タスクを作成しました"
       else
         render 'new'
       end
@@ -66,7 +68,7 @@ class TasksController < ApplicationController
     end
 
     def confirm
-      @task = Task.new(task_params)
+      @task = @task = current_user.tasks.build(task_params)
       render :new if @task.invalid?
     end
 
@@ -82,7 +84,7 @@ class TasksController < ApplicationController
     end
 
     def set_task
-      @task = Task.find(params[:id])
+      @task = current_user.tasks.find(params[:id])
     end
 
     def logged_in_user

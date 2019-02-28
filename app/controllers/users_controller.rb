@@ -35,9 +35,11 @@ class UsersController < ApplicationController
     end
 
     def correct_user
-      unless current_user == @task..user_id
-        flash[:danger] = "他人のプロフィールは見れません！"
-        redirect_to new_session_path
+      if current_user != nil
+        unless current_user == User.find(params[:id])
+          flash[:danger] = "他人のプロフィールは見れません！"
+          redirect_to new_session_path
+        end
       end
     end
 
