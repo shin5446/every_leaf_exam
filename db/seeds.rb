@@ -1,10 +1,10 @@
-100.times do |n|
-    name = Faker::Pokemon.name
+10.times do |n|
+    name = Faker::TvShows::BreakingBad.character
     email = Faker::Internet.email
-    # password = "password"
+    password = "password"
     User.create!(name: name,
                  email: email,
-                #  password: password,
-                #  password_confirmation: password,
+                 password: password,
+                 password_confirmation: password,
                  )
   end
