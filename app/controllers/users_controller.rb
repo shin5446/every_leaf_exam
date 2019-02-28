@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_action :no_need_to_sign_in, only: [:new]
 
     def new
       @user = User.new
@@ -25,5 +26,11 @@ class UsersController < ApplicationController
         params.require(:user).permit(:name, :email, :password,:password_confirmation)
     end
 
+    def no_need_to_sign_in
+      if logged_in?
+        flash[:danger] = "すでに登録済みです"
+        redirect_to tasks_path
+      end
+    end
 
 end
