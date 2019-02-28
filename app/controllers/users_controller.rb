@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     before_action :no_need_to_sign_in, only: [:new]
+    before_action :correct_user, only: [:show]
 
     def new
       @user = User.new
@@ -30,6 +31,13 @@ class UsersController < ApplicationController
       if logged_in?
         flash[:danger] = "すでに登録済みです"
         redirect_to tasks_path
+      end
+    end
+
+    def correct_user
+      unless current_user == @task..user_id
+        flash[:danger] = "他人のプロフィールは見れません！"
+        redirect_to new_session_path
       end
     end
 
