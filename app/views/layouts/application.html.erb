@@ -8,20 +8,33 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%
 =begin%>
- <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> 
+ <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 <%
 =end%>
   </head>
 
   <body>
   <header class = "border-bottom">
+  <% if logged_in? %>
+    <%= button_to "ログアウト", session_path(current_user.id), method: :delete, class: "btn btn-outline-primary btn-sm float-right" %>
+    <%= link_to "プロフィール", user_path(current_user.id), class: "btn btn-outline-primary btn-sm float-right" %>
+  <% else %>
+    <%= link_to "ログイン", new_session_path, class: "btn btn-outline-primary btn-sm float-right"%>
+    <%= link_to "ユーザー登録", new_user_path, class: "btn btn-primary btn-sm float-right" %>
+  <% end %>
 
     <div class = "apptitle navbar navbar-expand-md navbar-light navbar-brand">万葉TASK</div>
   </header>
   <div class = "container">
+
+  <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key} alert alert-danger") %>
+  <% end %>
+
   <% if notice.present?  %>
 　  <p class = "alert alert-success"><%= notice %></p>
   <% end %>
+
     <%= yield %>
   </div>
   </body>
