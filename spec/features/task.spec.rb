@@ -53,7 +53,7 @@ RSpec.feature "タスク管理機能", type: :feature do
   end
 
   scenario "タスクが終了期限の降順に並んでいるかのテスト" do
-    visit tasks_path
+    visit new_task_path
     click_link '終了期限でソートする'
     # save_and_open_page
     expect(Task.order("deadline DESC").map(&:title)).to eq ["test_task_04","test_task_02","test_task_03","test_task_01"]

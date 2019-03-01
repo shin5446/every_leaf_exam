@@ -33,4 +33,13 @@ FactoryBot.define do
       priority {'高'}
     end
 
+    factory :user_task, class: Task do
+      title { 'ログインテスト' }
+      content { 'テスト' }
+      deadline { '1923-04-20' }
+      status {'完了'}
+      priority {'低'}
+      user
+    end
+
   end
