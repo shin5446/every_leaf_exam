@@ -37,7 +37,7 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to admin_users_path, nitice: "ユーザーを削除しました"
+    redirect_to admin_users_path, notice: "ユーザーを削除しました"
   end
 
   private
