@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+
   end
 
   def new
@@ -24,21 +24,18 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    @user = User.new(user_params)
 
-    if @user.update
-      redirect_to admin_users_path, notice: "ユーザーを更新しました"
+    if @user.update(user_params)
+      redirect_to admin_users_path, notice: "ユーザーを編集しました"
     else
       render :new
     end
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to admin_users_path, nitice: "ユーザーを削除しました"
   end
