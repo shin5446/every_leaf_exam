@@ -4,30 +4,22 @@
 
 <table class = "table table-hover" >
   <tr>
-    <th>User.human_attribute_name(:id)</th>
-    <td><%= @user.id %></td>
+    <th>タイトル</th>
+    <th>内容</th>
+    <th>終了期限</th>
+    <th>優先度</th>
+    <th>状態</th>
+    <th>作成日時</th>
   </tr>
-  <tr>
-    <th>User.human_attribute_name(:name)</th>
-    <td><%= @user.name %></td>
-  </tr>
-  <tr>
-    <th>User.human_attribute_name(:email)</th>
-    <td><%= @user.email %></td>
-  </tr>
-  <tr>
-    <th>User.human_attribute_name(:admin)</th>
-    <td><%= @user.admin? ? 'あり' : 'なし' %></td>
-  </tr>
-  <tr>
-    <th>User.human_attribute_name(:created_at)</th>
-    <td><%= @user.created_at %></td>
-  </tr>
-  <tr>
-    <th>User.human_attribute_name(:updated_at)</th>
-    <td><%= @user.updated_at %></td>
-  </tr>
-</table>
 
-<%= link_to "ユーザーを編集する", edit_admin_user_path, class: "btn btn-outline-dark btn-sm" %>
-<%= button_to 'ユーザーを削除する', [:admin, user], method: :delete,data: { confirm: '本当に削除していいですか？'}, class: "btn btn-danger" %>
+  <% @user.tasks.each do |task| %>
+    <tr>
+      <td><%= task.title %></td>
+      <td><%= task.content %></td>
+      <td><%= task.deadline %></td>
+      <td><%= task.priority %></td>
+      <td><%= task.status %></td>
+      <td><%= task.created_at %></td>
+    </tr>
+　 <% end %>
+</table>
