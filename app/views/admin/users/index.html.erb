@@ -5,6 +5,7 @@
 <table class = "table table-hover" >
   <tr>
     <th><%= User.human_attribute_name(:name) %></th>
+    <th><%= User.human_attribute_name(:count) %></th>
     <th><%= User.human_attribute_name(:email) %></th>
     <th><%= User.human_attribute_name(:admin) %></th>
     <th><%= User.human_attribute_name(:created_at) %></th>
@@ -13,7 +14,8 @@
  <tbody>
   <% @users.each do |user| %>
     <tr>
-      <td><%= link_to user.name, [:admin, user]%></td>
+      <td><%= user.name %></td>
+      <td><%= user.tasks.count %></td>
       <td><%= user.email %></td>
       <td><%= user.admin? ? 'あり' : 'なし' %></td>
       <td><%= user.created_at %></td>
