@@ -1,7 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :require_admin
-  rescue_from ActionController::RoutingError, with: :render_404
+  # before_action :require_admin
 
   def index
     @users = User.includes(:tasks)
@@ -28,8 +27,9 @@ class Admin::UsersController < ApplicationController
   def update
 
     if @user.update(user_params)
-      redirect_to admin_users_path, notice: "ユーザーを編集しました"
+      redirect_to admin_users_path flash[:success] = "ユーザーを編集しました"
     else
+      flash[:danger] = "このユーザーの管理者権限を外す事はできません"
       render :new
     end
   end
@@ -56,9 +56,9 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :admin, :password,:password_confirmation)
   end
 
-  def require_admin
-    render_404 unless current_user.admin?
-  end
+  # def require_admin
+  #   render_404 unless current_user.try(:admin)
+  # end
 
   def render_404
     respond_to do |format|
