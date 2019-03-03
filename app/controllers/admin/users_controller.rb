@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.includes(:tasks).all
+    @users = User.includes(:tasks)
   end
 
   def show
