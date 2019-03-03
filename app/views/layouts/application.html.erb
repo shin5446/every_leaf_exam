@@ -25,7 +25,11 @@
     <%= link_to "ユーザー登録", new_user_path, class: "btn btn-primary btn-sm float-right" %>
   <% end %>
 
-  <%= link_to "ユーザー管理画面", admin_users_path, class: "btn btn-warning btn-sm float-right" %>
+　<% if current_user %>
+   <% if current_user.admin? %>
+    <%= link_to "ユーザー管理画面", admin_users_path, class: "btn btn-warning btn-sm float-right" %>
+   <% end %>
+　<% end %>
 
     <div class = "apptitle navbar navbar-expand-md navbar-light navbar-brand">万葉TASK</div>
   </header>
