@@ -1,6 +1,8 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_admin
+  rescue_from ActionController::RoutingError, with: :render_404
+
   def index
     @users = User.includes(:tasks)
   end
@@ -36,8 +38,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice: "ユーザーを削除しました"
+    if @user.destroy
+      flash[:success] = "ユーザーを削除しました"
+    else
+      flash[:danger] = "少なくとも1つ、ログイン用の認証が必要です"
+    end
+      redirect_to admin_users_path
   end
 
   private
@@ -47,10 +53,17 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :admin, :password,:password_confirmation,)
+    params.require(:user).permit(:name, :email, :admin, :password,:password_confirmation)
   end
 
   def require_admin
-    raise unless current_user.admin?
+    render_404 unless current_user.admin?
   end
+
+  def render_404
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
+    end
+  end
+
 end
