@@ -15,3 +15,7 @@ ja:
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         remember_me: "ログインを記憶"
+        created_at: "登録日時"
+        updated_at: "更新日時"
+        count: "タスク数"
+        admin: "管理者権限"
