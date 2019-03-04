@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  # before_action :require_admin
+  before_action :require_admin
 
   def index
     @users = User.includes(:tasks)
@@ -56,9 +56,9 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :admin, :password,:password_confirmation)
   end
 
-  # def require_admin
-  #   render_404 unless current_user.try(:admin)
-  # end
+  def require_admin
+    render_404 unless current_user.try(:admin)
+  end
 
   def render_404
     respond_to do |format|
