@@ -20,9 +20,11 @@
     <td><%= @task.status %></td>
   </tr>
   <tr>
-    <th>作成日時</th>
-    <td><%= @task.created_at %></td>
+      <th>ラベル</th>
+      <% @task.labels.each do |label| %>
+        <td><%= label.name %></td>
+      <% end %>
   </tr>
-</table>
 
+</table>
 <%= link_to '戻る', tasks_path, class: "btn btn-outline-info btn-sm" %>
