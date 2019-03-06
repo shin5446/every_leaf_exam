@@ -8,9 +8,9 @@ class Task < ApplicationRecord
     #     current_tags = self.labels.pluck(:name) unless self.labels.nil?
     # end
 
-    # validates :title, :content, presence: true
-    # validates :title, uniqueness: true,length: { minimum: 1, maximum: 30 }
-    # validates :content,length: { minimum: 1, maximum: 600 }
+    validates :title, :content, presence: true
+    validates :title, uniqueness: true,length: { minimum: 1, maximum: 30 }
+    validates :content,length: { minimum: 1, maximum: 600 }
 
     scope :sort_deadline, -> {order(deadline: :desc)}
     scope :sort_priority, -> {order(priority: :desc)}
