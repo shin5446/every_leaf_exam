@@ -2,10 +2,15 @@ class Task < ApplicationRecord
     enum priority: [:低, :中, :高]
     belongs_to :user
     has_many :task_labels, dependent: :destroy
-    has_many :labels, through: :article_categories
-    validates :title, :content, presence: true
-    validates :title, uniqueness: true,length: { minimum: 1, maximum: 30 }
-    validates :content,length: { minimum: 1, maximum: 600 }
+    has_many :labels, through: :task_labels, source: :label
+
+    # def save_labels(tags)
+    #     current_tags = self.labels.pluck(:name) unless self.labels.nil?
+    # end
+
+    # validates :title, :content, presence: true
+    # validates :title, uniqueness: true,length: { minimum: 1, maximum: 30 }
+    # validates :content,length: { minimum: 1, maximum: 600 }
 
     scope :sort_deadline, -> {order(deadline: :desc)}
     scope :sort_priority, -> {order(priority: :desc)}

@@ -13,6 +13,7 @@ class User < ApplicationRecord
     private
 
     def at_least_one_admin
+
         if User.where(admin:true).size == 1
            # errors[:base] << '少なくとも1つ、ログイン用の認証が必要です'
           throw :abort
@@ -20,7 +21,7 @@ class User < ApplicationRecord
     end
 
     def no_edit_last_one
-        if User.where(admin:true).size <= 40
+        if User.where(admin:true).size == 1
           throw :abort unless admin == true
         end
     end

@@ -1,4 +1,5 @@
-<%= form_with(model: @task,local: true ,url: choose_new_or_edit  ) do |form| %>
+<%#= form_with(model: @task,local: true ,url: choose_new_or_edit  ) do |form| %>
+<%= form_with(model: @task,local: true ,url: tasks_path  ) do |form| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
       <h2><%= @task.errors.count %>件のエラーがあります。</h2>
@@ -35,6 +36,22 @@
     <%= form.label :状態%>
     <%= form.select :status, [["未着手"],["着手中"],["完了"]],include_blank: true, selected:"" %>
   </div>
+
+  <% Label.all.each do |label| %>
+  <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+  <label style = "background-color: aquamarine"><%= label.name %></label>
+  <% end %>
+
+<%
+=begin%>
+ <div class="form-item">
+          <%= form.label :label_ids, 'ラベル' %>
+          <%= form.collection_check_boxes 'label_ids', Label.all, :id, :name do |l| %>
+            <%= l.check_box + l.label %>
+          <% end %>
+</div>
+<%
+=end%>
 
   <div class="actions" >
   <%= form.submit nil, class: "btn btn-outline-success btn-sm" %>

@@ -41,11 +41,17 @@ class TasksController < ApplicationController
     end
 
     def create
+
       # @task = Task.create(task_params.merge(user_id: corrent_user.id))
       # @task = corrent_user.tasks.new(task_params)
+      # binding.pry
       @task = current_user.tasks.build(task_params)
+      # binding.pry
+      # @label_list =  params[:task][:label_ids]
+      # raise
       if @task.save
-        redirect_to tasks_path, notice: "タスクを作成しました"
+        #  @label_list.save
+         redirect_to tasks_path, notice: "タスクを作成しました"
       else
         render 'new'
       end
@@ -68,7 +74,9 @@ class TasksController < ApplicationController
     end
 
     def confirm
-      @task = @task = current_user.tasks.build(task_params)
+      @task = current_user.tasks.build(task_params)
+      # @label_list =  params[:labels]
+      # raise
       render :new if @task.invalid?
     end
 
@@ -80,7 +88,7 @@ class TasksController < ApplicationController
     private
 
     def task_params
-      params.require(:task).permit(:title, :content, :priority, :deadline, :status, :image, :user_id,)
+      params.require(:task).permit(:title, :content, :priority, :deadline, :status, :image, :user_id, :name, label_ids: [])
     end
 
     def set_task
