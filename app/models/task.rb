@@ -18,4 +18,5 @@ class Task < ApplicationRecord
     # scope :search_title_status, -> (a,b){where("title LIKE ? and status LIKE ?" , "%#{ a }%", "%#{ b }%")}
     scope :search_title, -> (a){where("title LIKE ?", "%#{ a }%")}
     scope :search_status, -> (a){where("status LIKE ?", "%#{ a }%")}
+    scope :search_label, -> (a){where(id: label_ids = TaskLabel.where(label_id: a).select(:task_id))}
 end

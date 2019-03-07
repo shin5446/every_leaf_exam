@@ -17,16 +17,26 @@ class TasksController < ApplicationController
       if params[:task] != nil
       # if params[:task].present?
       # if params[:search] == "true"
-        if params[:task][:title] && params[:task][:status]
+
+        if params[:task][:title].present? && params[:task][:status].present?
+          raise
           @tasks = current_user.tasks.search_title(params[:task][:title]).search_status(params[:task][:status])
           @tasks = current_user.tasks.page(params[:page]).per(8).search_title(params[:task][:title]).search_status(params[:task][:status])
           # @tasks = Task.search_title_status(params[:task][:title],params[:task][:status])
-        elsif params[:task][:title]
+        elsif params[:task][:title].present?
           @tasks = current_user.tasks.search_title(params[:task][:title])
           @tasks = current_user.tasks.page(params[:page]).per(8).search_title(params[:task][:title])
-        else params[:task][:status]
+        elsif params[:task][:status].present?
           @tasks = current_user.tasks.search_status(params[:task][:status])
           @tasks = current_user.tasks.page(params[:page]).per(8).search_status(params[:task][:status])
+        else params[:task][:label_id].present?
+          @tasks = current_user.tasks.search_label(params[:task][:label_id])
+          @tasks = current_user.tasks.page(params[:page]).per(8).search_label(params[:task][:label_id])
+
+          # labelids = Label.find(params[:task][:label_id]).task_labels
+          # taskids = labelids.all.pluck(:task_id)
+          # @tasks = current_user.tasks.where(id: taskids)
+          # @tasks = current_user.tasks.page(params[:page]).per(8).where(id: taskids)
         end
       end
 
@@ -88,7 +98,7 @@ class TasksController < ApplicationController
     private
 
     def task_params
-      params.require(:task).permit(:title, :content, :priority, :deadline, :status, :image, :user_id, :name, label_ids: [])
+      params.require(:task).permit(:title, :content, :priority, :deadline, :status, :image, :user_id, :name,label_ids: [])
     end
 
     def set_task
