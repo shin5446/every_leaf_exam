@@ -1,5 +1,9 @@
-<%#= form_with(model: @task,local: true ,url: choose_new_or_edit  ) do |form| %>
-<%= form_with(model: @task,local: true ,url: tasks_path  ) do |form| %>
+<%= form_with(model: @task,local: true ,url: choose_new_or_edit  ) do |form| %>
+<%
+=begin%>
+ <%= form_with(model: @task,local: true ,url: tasks_path  ) do |form| %> 
+<%
+=end%>
   <% if @task.errors.any? %>
     <div id="error_explanation">
       <h2><%= @task.errors.count %>件のエラーがあります。</h2>
