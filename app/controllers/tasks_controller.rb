@@ -61,7 +61,7 @@ class TasksController < ApplicationController
       # raise
       if @task.save
         #  @label_list.save
-         redirect_to tasks_path, notice: "タスクを作成しました"
+         redirect_to tasks_path flash[:success] = "編集しました"
       else
         render 'new'
       end
@@ -77,7 +77,7 @@ class TasksController < ApplicationController
 
     def update
       if @task.update(task_params)
-        redirect_to tasks_path, notice: "タスクを編集しました！"
+        redirect_to tasks_path flash[:success] = "編集しました"
       else
         render 'edit'
       end
@@ -92,7 +92,7 @@ class TasksController < ApplicationController
 
     def destroy
       @task.destroy
-      redirect_to tasks_path, notice:"タスクを削除しました！"
+      redirect_to tasks_path flash[:success] ="タスクを削除しました！"
     end
 
     private
