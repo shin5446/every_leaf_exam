@@ -33,7 +33,7 @@
 
   <div class="field">
     <%= form.label :優先順位%>
-    <%= form.select :priority,Task.priorities.keys,include_blank: true, selected:"" %>
+    <%= form.select :priority,Task.priorities.keys %>
   </div>
 
   <div class="field">
