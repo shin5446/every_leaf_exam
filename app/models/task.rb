@@ -11,6 +11,7 @@ class Task < ApplicationRecord
     validates :title, :content, presence: true
     validates :title, uniqueness: true,length: { minimum: 1, maximum: 30 }
     validates :content,length: { minimum: 1, maximum: 600 }
+    validates :priority, presence: true, allow_nil: true
 
     scope :sort_deadline, -> {order(deadline: :desc)}
     scope :sort_priority, -> {order(priority: :desc)}
