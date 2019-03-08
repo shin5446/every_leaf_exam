@@ -61,7 +61,7 @@ class TasksController < ApplicationController
       # raise
       if @task.save
         #  @label_list.save
-         redirect_to tasks_path flash[:success] = "編集しました"
+         redirect_to tasks_path flash[:success] = "登録しました"
       else
         render 'new'
       end
