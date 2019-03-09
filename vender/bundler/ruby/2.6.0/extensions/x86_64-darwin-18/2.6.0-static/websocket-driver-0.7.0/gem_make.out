@@ -1,0 +1,15 @@
+current directory: /Users/tanakashintaro/workspace/everyleaf/vender/bundler/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+/Users/tanakashintaro/.rbenv/versions/2.6.1/bin/ruby -I /Users/tanakashintaro/.rbenv/versions/2.6.1/lib/ruby/2.6.0 -r ./siteconf20190309-62109-1ltmd75.rb extconf.rb
+creating Makefile
+
+current directory: /Users/tanakashintaro/workspace/everyleaf/vender/bundler/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /Users/tanakashintaro/workspace/everyleaf/vender/bundler/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+
+current directory: /Users/tanakashintaro/workspace/everyleaf/vender/bundler/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20190309-62109-bvuenv
