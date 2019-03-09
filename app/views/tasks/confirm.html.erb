@@ -12,7 +12,11 @@
   <p>終了期限:<%= @task.deadline %></p>
   <p>優先順位:<%= @task.priority %></p>
   <p>状態:<%= @task.status %></p>
-  <%= form.submit  "登録する" %>
+
+ <%= form.collection_check_boxes :label_ids, Label.all, :id, :name do |l| %>
+  <%= l.check_box + l.label %>
+  <% end %><br>
+ <%= form.submit  "登録する" , class: "btn btn-outline-success btn-sm" %>
 <% end %>
 
 <%= form_with(model: @task, url: new_task_path, local: true, method: 'get') do |form| %>
@@ -21,6 +25,7 @@
   <%= form.hidden_field :deadline %>
   <%= form.hidden_field :priority %>
   <%= form.hidden_field :status %>
+  <%= form.hidden_field :label_ids %>
 
   <%= form.submit "戻る", name: 'back', class: "btn btn-outline-info btn-sm" %>
 <% end %>

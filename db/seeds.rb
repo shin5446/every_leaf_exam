@@ -1,10 +1,5 @@
-10.times do |n|
-    name = Faker::TvShows::BreakingBad.character
-    email = Faker::Internet.email
-    password = "password"
-    User.create!(name: name,
-                 email: email,
-                 password: password,
-                 password_confirmation: password,
-                 )
-  end
+Label.create!(name: '仕事')
+Label.create!(name: '趣味')
+Label.create!(name: '勉強')
+Label.create!(name: '予定')
+Label.create!(name: 'テレビ')
