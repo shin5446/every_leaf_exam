@@ -40,7 +40,7 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     if @user.destroy
-      flash[:success] = "ユーザーを削除しました"
+      flash[:danger] = "ユーザーを削除しました"
     else
       flash[:danger] = "少なくとも1つ、ログイン用の認証が必要です"
     end
