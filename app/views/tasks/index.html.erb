@@ -36,8 +36,8 @@
       <td><%= task.status %></td>
       <td><%= task.created_at %></td>
       <td><%= link_to '詳細を確認する', task_path(task.id), class: "btn btn-outline-dark btn-sm" %></td>
-      <td><%= button_to "タスクを編集する", edit_task_path(task.id), method: :get, class: "btn btn-outline-dark btn-sm" %></td>
-      <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete,data: { confirm: '本当に削除していいですか？'}, class: "btn btn-danger" %></td>
+      <td><%= link_to "タスクを編集する", edit_task_path(task.id), method: :get, class: "btn btn-outline-dark btn-sm" %></td>
+      <td><%= button_to 'タスクを削除する', task_path(task.id), method: :delete,data: { confirm: '本当に削除していいですか？'}, class: "btn btn-danger" %></td>
       <% task.labels.each do |label| %>
           <td><%= label.name %></td>
       <% end %>
