@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  get '/', to: 'tasks#index'
+  get '/', to: 'top_pages#index'
   resources :tasks do
     collection do
       post :confirm
