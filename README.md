@@ -12,6 +12,10 @@
 
 タスク管理システムの開発
 
+## ☆HerokuのURL☆
+
+https://hidden-mesa-38641.herokuapp.com
+
 ## ☆Herokuへのデプロイ方法☆
 
 ##### 1.アセットファイルをプリコンパイル
