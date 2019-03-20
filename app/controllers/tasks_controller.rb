@@ -4,29 +4,22 @@ class TasksController < ApplicationController
 
     def index
       if params[:sort_expired]
-        @tasks = current_user.tasks.sort_deadline
-        @tasks = current_user.tasks.page(params[:page]).per(8).sort_deadline
+        @tasks = current_user.tasks.sort_deadline.page(params[:page]).per(8)
       elsif params[:sort_priority]
-        @tasks = current_user.tasks.sort_priority
-        @tasks = current_user.tasks.page(params[:page]).per(8).sort_priority
+        @tasks = current_user.tasks.sort_priority.page(params[:page]).per(8)
       else
-        @tasks = current_user.tasks.sort_created_at
-        @tasks = current_user.tasks.page(params[:page]).per(8)
+        @tasks = current_user.tasks.sort_created_at.page(params[:page]).per(8)
       end
 
       if params[:task] != nil
         if params[:task][:title].present? && params[:task][:status].present?
-          @tasks = current_user.tasks.search_title(params[:task][:title]).search_status(params[:task][:status])
-          @tasks = current_user.tasks.page(params[:page]).per(8).search_title(params[:task][:title]).search_status(params[:task][:status])
+          @tasks = current_user.tasks.search_title(params[:task][:title]).page(params[:page]).per(8)
         elsif params[:task][:title].present?
-          @tasks = current_user.tasks.search_title(params[:task][:title])
-          @tasks = current_user.tasks.page(params[:page]).per(8).search_title(params[:task][:title])
+          @tasks = current_user.tasks.search_title(params[:task][:title]).page(params[:page]).per(8)
         elsif params[:task][:status].present?
-          @tasks = current_user.tasks.search_status(params[:task][:status])
-          @tasks = current_user.tasks.page(params[:page]).per(8).search_status(params[:task][:status])
+          @tasks = current_user.tasks.search_status(params[:task][:status]).page(params[:page]).per(8)
         else params[:task][:label_id].present?
-          @tasks = current_user.tasks.search_label(params[:task][:label_id])
-          @tasks = current_user.tasks.page(params[:page]).per(8).search_label(params[:task][:label_id])
+          @tasks = current_user.tasks.search_label(params[:task][:label_id]).page(params[:page]).per(8)
 
           # 以下の方法でもラベル検索できるが、上記モデルにスコープを使って書いた方がスマート。下記は他の実装の参考にしたいのでコメントアウトして残しておく。
           # labelids = Label.find(params[:task][:label_id]).task_labels
