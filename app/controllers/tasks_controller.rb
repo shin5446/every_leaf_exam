@@ -15,14 +15,9 @@ class TasksController < ApplicationController
       end
 
       if params[:task] != nil
-      # if params[:task].present?
-      # if params[:search] == "true"
-
         if params[:task][:title].present? && params[:task][:status].present?
-          raise
           @tasks = current_user.tasks.search_title(params[:task][:title]).search_status(params[:task][:status])
           @tasks = current_user.tasks.page(params[:page]).per(8).search_title(params[:task][:title]).search_status(params[:task][:status])
-          # @tasks = Task.search_title_status(params[:task][:title],params[:task][:status])
         elsif params[:task][:title].present?
           @tasks = current_user.tasks.search_title(params[:task][:title])
           @tasks = current_user.tasks.page(params[:page]).per(8).search_title(params[:task][:title])
@@ -33,6 +28,7 @@ class TasksController < ApplicationController
           @tasks = current_user.tasks.search_label(params[:task][:label_id])
           @tasks = current_user.tasks.page(params[:page]).per(8).search_label(params[:task][:label_id])
 
+          # 以下の方法でもラベル検索できるが、上記モデルにスコープを使って書いた方がスマート。下記は他の実装の参考にしたいのでコメントアウトして残しておく。
           # labelids = Label.find(params[:task][:label_id]).task_labels
           # taskids = labelids.all.pluck(:task_id)
           # @tasks = current_user.tasks.where(id: taskids)
@@ -51,29 +47,17 @@ class TasksController < ApplicationController
     end
 
     def create
-
-      # @task = Task.create(task_params.merge(user_id: corrent_user.id))
-      # @task = corrent_user.tasks.new(task_params)
-      # binding.pry
       @task = current_user.tasks.build(task_params)
-      # binding.pry
-      # @label_list =  params[:task][:label_ids]
-      # raise
       if @task.save
-        #  @label_list.save
          redirect_to tasks_path flash[:success] = "登録しました"
       else
         render 'new'
       end
     end
 
-    def show
+    def show;end
 
-    end
-
-    def edit
-
-    end
+    def edit;end
 
     def update
       if @task.update(task_params)
@@ -85,8 +69,6 @@ class TasksController < ApplicationController
 
     def confirm
       @task = current_user.tasks.build(task_params)
-      # @label_list =  params[:labels]
-      # raise
       render :new if @task.invalid?
     end
 
