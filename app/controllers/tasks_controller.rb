@@ -4,22 +4,22 @@ class TasksController < ApplicationController
 
     def index
       if params[:sort_expired]
-        @tasks = current_user.tasks.sort_deadline.page(params[:page]).per(8)
+        @tasks = current_user.tasks.sort_deadline.page(params[:page]).per(8) #終了期限で並べ替え
       elsif params[:sort_priority]
-        @tasks = current_user.tasks.sort_priority.page(params[:page]).per(8)
+        @tasks = current_user.tasks.sort_priority.page(params[:page]).per(8) #優先順位で並べ替え
       else
-        @tasks = current_user.tasks.sort_created_at.page(params[:page]).per(8)
+        @tasks = current_user.tasks.sort_created_at.page(params[:page]).per(8) #作成日時で並べ替え
       end
 
       if params[:task] != nil
         if params[:task][:title].present? && params[:task][:status].present?
-          @tasks = current_user.tasks.search_title(params[:task][:title]).page(params[:page]).per(8)
+          @tasks = current_user.tasks.search_title(params[:task][:title]).page(params[:page]).per(8) #タイトルと状態で検索
         elsif params[:task][:title].present?
-          @tasks = current_user.tasks.search_title(params[:task][:title]).page(params[:page]).per(8)
+          @tasks = current_user.tasks.search_title(params[:task][:title]).page(params[:page]).per(8) #タイトルのみで検索
         elsif params[:task][:status].present?
-          @tasks = current_user.tasks.search_status(params[:task][:status]).page(params[:page]).per(8)
+          @tasks = current_user.tasks.search_status(params[:task][:status]).page(params[:page]).per(8) #状態のみで検索
         else params[:task][:label_id].present?
-          @tasks = current_user.tasks.search_label(params[:task][:label_id]).page(params[:page]).per(8)
+          @tasks = current_user.tasks.search_label(params[:task][:label_id]).page(params[:page]).per(8) #ラベルで検索
 
           # 以下の方法でもラベル検索できるが、上記モデルにスコープを使って書いた方がスマート。下記は他の実装の参考にしたいのでコメントアウトして残しておく。
           # labelids = Label.find(params[:task][:label_id]).task_labels
@@ -73,13 +73,22 @@ class TasksController < ApplicationController
     private
 
     def task_params
-      params.require(:task).permit(:title, :content, :priority, :deadline, :status, :image, :user_id, :name,label_ids: [])
+      params.require(:task).permit(:title,
+                                   :content,
+                                   :priority,
+                                   :deadline,
+                                   :status,
+                                   :image,
+                                   :user_id,
+                                   :name,
+                                   label_ids: [])
     end
 
     def set_task
       @task = current_user.tasks.find(params[:id])
     end
 
+    #ログインしてなければログイン画面に返す
     def logged_in_user
       unless logged_in?
         flash[:danger] = "ログインしてください！"
