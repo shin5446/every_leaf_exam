@@ -22,6 +22,8 @@ gem 'bcrypt', '3.1.11'
 gem 'dotenv-rails'
 gem 'unicorn'
 gem 'mini_racer', platforms: :ruby
+gem 'ed25519'
+gem 'bcrypt_pbkdf'
 
 # gem 'cancancan'
 # gem 'bullet'
