@@ -5,7 +5,7 @@ lock '3.6.0'
 set :application, 'everyleaf'
 
 # cloneするgitのレポジトリ（xxxxxxxx：ユーザ名、yyyyyyyy：アプリケーション名）
-set :repo_url, 'https://git@github.com:shin5446/every_leaf_exam.git'
+set :repo_url, 'https://github.com/shin5446/every_leaf_exam'
 
 # deployするブランチ。デフォルトはmasterなのでなくても可。
 set :branch, ENV['BRANCH'] || 'master'
