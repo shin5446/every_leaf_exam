@@ -56,7 +56,7 @@ RSpec.feature "タスク管理機能", type: :feature do
     visit tasks_path
     click_link '終了期限でソートする'
     # save_and_open_page
-    expect(Task.order("deadline DESC").map(&:title)).to eq ["test_task_04","test_task_02","test_task_03","test_task_01"]
+    expect(Task.order("deadline DESC").map(&:deadline)).to eq ["test_task_04","test_task_02","test_task_03","test_task_01"]
   end
 
   scenario "sort_deadlineスコープに対するテスト" do
