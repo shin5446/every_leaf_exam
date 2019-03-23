@@ -49,6 +49,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
+  gem "non-stupid-digest-assets"
 end
 
 group :development do
