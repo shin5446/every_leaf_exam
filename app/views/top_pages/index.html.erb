@@ -1,6 +1,5 @@
 <div class="top-main">
-  <div class="top-content">
-  <%= image_tag  "robot_toppage.png" %>
-<%= link_to "SHINTASKをはじめる", new_user_path, class: "btn btn-primary btn-lg" %>
-  </div>
+  <%= image_tag "robot_toppage.png", class: "top-content" do %>
+    <%= link_to "SHINTASKをはじめる", new_user_path, class: "btn btn-primary btn-lg" %>
+  <% end %>
 </div>
