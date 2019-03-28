@@ -1,7 +1,5 @@
 class SessionsController < ApplicationController
-
-  def new
-  end
+  def new; end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
@@ -19,5 +17,4 @@ class SessionsController < ApplicationController
     flash[:danger] = 'ログアウトしました'
     redirect_to new_session_path
   end
-
 end
