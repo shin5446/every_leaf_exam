@@ -13,10 +13,11 @@
   <p>優先順位:<%= @task.priority %></p>
   <p>状態:<%= @task.status %></p>
 
- <%= form.collection_check_boxes :label_ids, Label.all, :id, :name do |l| %>
-  <%= l.check_box + l.label %>
+	<%= form.collection_check_boxes :label_ids, Label.all, :id, :name do |l| %>
+  	<%= l.check_box + l.label %>
   <% end %><br>
- <%= form.submit  "登録する" , class: "btn btn-outline-success btn-sm" %>
+
+	<%= form.submit  "登録する" , class: "btn btn-outline-success btn-sm" %>
 <% end %>
 
 <%= form_with(model: @task, url: new_task_path, local: true, method: 'get') do |form| %>
