@@ -24,5 +24,5 @@ class Task < ApplicationRecord
 		if self.priority == nil
 				self.priority = 0
 		end
-	end
+  end
 end
