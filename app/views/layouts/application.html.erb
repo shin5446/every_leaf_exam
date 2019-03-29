@@ -11,35 +11,35 @@
 
   <body>
   <header class = "border-bottom">
-		<% if logged_in? %>
-			<%= button_to "ログアウト", session_path(current_user.id), method: :delete, class: "btn btn-outline-primary btn-sm float-right" %>
-			<%= link_to "プロフィール", user_path(current_user.id), class: "btn btn-outline-primary btn-sm float-right" %>
-		<% else %>
-			<%= link_to "ログイン", new_session_path, class: "btn btn-outline-primary btn-sm float-right"%>
-			<%= link_to "ユーザー登録", new_user_path, class: "btn btn-primary btn-sm float-right" %>
-		<% end %>
+    <% if logged_in? %>
+      <%= button_to "ログアウト", session_path(current_user.id), method: :delete, class: "btn btn-outline-primary btn-sm float-right" %>
+      <%= link_to "プロフィール", user_path(current_user.id), class: "btn btn-outline-primary btn-sm float-right" %>
+    <% else %>
+      <%= link_to "ログイン", new_session_path, class: "btn btn-outline-primary btn-sm float-right"%>
+      <%= link_to "ユーザー登録", new_user_path, class: "btn btn-primary btn-sm float-right" %>
+    <% end %>
 
-		<% if current_user %>
-			<% if current_user.admin? %>
-				<%= link_to "ユーザー管理画面", admin_users_path, class: "btn btn-warning btn-sm float-right" %>
-			<% end %>
-		<% end %>
+    <% if current_user %>
+      <% if current_user.admin? %>
+        <%= link_to "ユーザー管理画面", admin_users_path, class: "btn btn-warning btn-sm float-right" %>
+      <% end %>
+    <% end %>
 
-		<div class = "apptitle navbar navbar-expand-md navbar-light navbar-brand active">
-			<%= link_to "SHINTASK", "/" , class:"btn btn-light text-primary" %>
-		</div>
+    <div class = "apptitle navbar navbar-expand-md navbar-light navbar-brand active">
+      <%= link_to "SHINTASK", "/" , class:"btn btn-light text-primary" %>
+    </div>
   </header>
-		<div class = "container">
-			<% flash.each do |key, value| %>
-				<% if key == "danger" %>
-					<%= content_tag(:div, value, class: "#{key} alert alert-danger") %>
-				<% else %>
-					<%= content_tag(:div, value, class: "#{key} alert alert-success") %>
-				<% end %>
-			<% end %>
+    <div class = "container">
+      <% flash.each do |key, value| %>
+        <% if key == "danger" %>
+          <%= content_tag(:div, value, class: "#{key} alert alert-danger") %>
+        <% else %>
+          <%= content_tag(:div, value, class: "#{key} alert alert-success") %>
+        <% end %>
+      <% end %>
 
-			<%= yield %>
+      <%= yield %>
 
-		</div>
+    </div>
   </body>
 </html>
