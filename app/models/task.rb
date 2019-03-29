@@ -22,7 +22,7 @@ class Task < ApplicationRecord
 
   def skip_null_false
     if self.priority == nil
-        self.priority = 0
+      self.priority = 0
     end
   end
 end

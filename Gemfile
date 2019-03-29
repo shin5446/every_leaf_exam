@@ -19,6 +19,12 @@ gem 'kaminari', '~> 0.17.0'
 gem 'bootstrap'
 gem 'faker'
 gem 'bcrypt', '3.1.11'
+gem 'dotenv-rails'
+gem 'unicorn'
+gem 'mini_racer', platforms: :ruby
+gem 'ed25519'
+gem 'bcrypt_pbkdf'
+
 # gem 'cancancan'
 # gem 'bullet'
 # gem 'kaminari-bootstrap', '~> 3.0.1'
@@ -38,6 +44,12 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'launchy'
   gem 'database_cleaner'
+  gem 'capistrano', '3.6.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
+  gem "non-stupid-digest-assets"
 end
 
 group :development do
