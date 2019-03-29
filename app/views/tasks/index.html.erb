@@ -7,10 +7,9 @@
   <%= f.select :status, [["未着手"],["着手中"],["完了"]], include_blank: true %>
   <%= f.label :label_search, 'ラベル検索' %>
   <%= f.select :label_id,  Label.all.map{|label| [label.name, label.id]}, include_blank: true %>
+	<%= f.hidden_field :search, value: 'true' %>
 
-<%= f.hidden_field :search, value: 'true' %>
-
- <%= f.submit 'Search', class: "btn btn-outline-success btn-sm" %>
+	<%= f.submit 'Search', class: "btn btn-outline-success btn-sm" %>
 <% end %>
 
 <%= link_to '新しくタスクを投稿する', new_task_path, class: "btn btn-primary btn-sm" %>
@@ -39,10 +38,9 @@
       <td><%= link_to "タスクを編集する", edit_task_path(task.id), method: :get, class: "btn btn-outline-dark btn-sm" %></td>
       <td><%= button_to 'タスクを削除する', task_path(task.id), method: :delete,data: { confirm: '本当に削除していいですか？'}, class: "btn btn-danger" %></td>
       <% task.labels.each do |label| %>
-          <td><%= label.name %></td>
+        <td><%= label.name %></td>
       <% end %>
     </tr>
-　 <% end %>
-　
-<%= paginate @tasks %>
+	<% end %>
+	<%= paginate @tasks %>
 </table>
