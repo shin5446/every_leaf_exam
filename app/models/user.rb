@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   validates :name, :email, presence: true
   validates :name, length: { maximum: 30 }
-  validates :email, length: { maximum: 60 },uniqueness: true,
+  validates :email, length: { maximum: 60 }, uniqueness: true,
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
@@ -16,13 +16,11 @@ class User < ApplicationRecord
   private
 
   def at_least_one_admin
-    if User.where(admin:true).size == 1
-      throw :abort
-    end
+    throw :abort if User.where(admin: true).size == 1
   end
 
   def no_edit_last_one
-    if User.where(admin:true).size == 1
+    if User.where(admin: true).size == 1
       throw :abort unless admin == true
     end
   end

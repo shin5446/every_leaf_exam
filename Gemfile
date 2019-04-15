@@ -50,6 +50,7 @@ group :development, :test do
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
   gem "non-stupid-digest-assets"
+  gem 'rubocop', require: false
 end
 
 group :development do

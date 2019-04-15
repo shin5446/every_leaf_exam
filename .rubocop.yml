@@ -1,0 +1,23 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  TargetRubyVersion: 2.4.1
+  Exclude:
+    - vendor/bundle/**/*
+    - bin/*
+    - db/**/*
+    - config/**/*
+    - Gemfile
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false

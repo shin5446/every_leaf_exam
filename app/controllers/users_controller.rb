@@ -23,20 +23,20 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,:password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
   def no_need_to_sign_in
     if logged_in?
-      flash[:danger] = "すでに登録済みです"
+      flash[:danger] = 'すでに登録済みです'
       redirect_to tasks_path
     end
   end
 
   def correct_user
-    if current_user != nil
+    unless current_user.nil?
       unless current_user == User.find(params[:id])
-        flash[:danger] = "他人のプロフィールは見れません！"
+        flash[:danger] = '他人のプロフィールは見れません！'
         redirect_to new_session_path
       end
     end
