@@ -12,14 +12,14 @@ class TasksController < ApplicationController
              end
 
     unless params[:task].nil?
-      if params[:task][:title].present? && params[:task][:status].present?
-        @tasks = current_user.tasks.search_title(params[:task][:title]).page(params[:page]).per(8) # タイトルと状態で検索
-      elsif params[:task][:title].present?
-        @tasks = current_user.tasks.search_title(params[:task][:title]).page(params[:page]).per(8) # タイトルのみで検索
-      elsif params[:task][:status].present?
-        @tasks = current_user.tasks.search_status(params[:task][:status]).page(params[:page]).per(8) # 状態のみで検索
-      else params[:task][:label_id].present?
-           @tasks = current_user.tasks.search_label(params[:task][:label_id]).page(params[:page]).per(8) # ラベルで検索
+      @tasks = if params[:task][:title].present? && params[:task][:status].present?
+                current_user.tasks.search_title(params[:task][:title]).page(params[:page]).per(8) # タイトルと状態で検索
+               elsif params[:task][:title].present?
+                current_user.tasks.search_title(params[:task][:title]).page(params[:page]).per(8) # タイトルのみで検索
+               elsif params[:task][:status].present?
+                current_user.tasks.search_status(params[:task][:status]).page(params[:page]).per(8) # 状態のみで検索
+               else params[:task][:label_id].present?
+                current_user.tasks.search_label(params[:task][:label_id]).page(params[:page]).per(8) # ラベルで検索
 
         # 以下の方法でもラベル検索できるが、上記モデルにスコープを使って書いた方がスマート。下記は他の実装の参考にしたいのでコメントアウトして残しておく。
         # labelids = Label.find(params[:task][:label_id]).task_labels
