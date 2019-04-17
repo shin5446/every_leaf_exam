@@ -12,9 +12,9 @@ class Task < ApplicationRecord
   scope :sort_deadline, -> { order(deadline: :desc) }
   scope :sort_priority, -> { order(priority: :desc) }
   scope :sort_created_at, -> { order(created_at: :desc) }
-  scope :search_title, ->(a) { where('title LIKE ?', "%#{a}%") }
-  scope :search_status, ->(a) { where('status LIKE ?', "%#{a}%") }
-  scope :search_label, ->(a) { where(id: label_ids = TaskLabel.where(label_id: a).select(:task_id)) }
+  scope :search_title, ->(title) { where('title LIKE ?', "%#{title}%") }
+  scope :search_status, ->(status) { where('status LIKE ?', "%#{status}%") }
+  scope :search_label, ->(label_id) { where(id: label_ids = TaskLabel.where(label_id: label_id).select(:task_id)) }
 
   before_save :skip_null_false
 
